@@ -42,4 +42,4 @@ COPY --from=builder /app/messages ./messages
 COPY --from=builder /app/src/i18n ./src/i18n
 
 EXPOSE 3000
-CMD ["sh", "-c", "HOSTNAME=0.0.0.0 PORT=${PORT:-3000} node server.js"]
+CMD ["sh", "-c", "HOSTNAME=0.0.0.0 PORT=${PORT:-3000} node server.js --hostname 0.0.0.0 --port ${PORT:-3000}"]
