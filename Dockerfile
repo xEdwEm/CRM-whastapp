@@ -42,6 +42,8 @@ COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/messages ./messages
 COPY --from=builder /app/src/i18n ./src/i18n
+COPY start.sh ./start.sh
+RUN chmod +x ./start.sh
 
 EXPOSE 3000
-CMD ["sh", "-c", "HOSTNAME=0.0.0.0 PORT=${PORT:-3000} node node_modules/next/dist/bin/next start -H 0.0.0.0 -p ${PORT:-3000}"]
+CMD ["./start.sh"]
