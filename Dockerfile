@@ -33,6 +33,7 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 ENV NEXT_PUBLIC_APP_LOCALE=en
 
 COPY --from=builder /app/package.json ./package.json
@@ -43,4 +44,4 @@ COPY --from=builder /app/messages ./messages
 COPY --from=builder /app/src/i18n ./src/i18n
 
 EXPOSE 3000
-CMD ["sh", "-c", "node node_modules/next/dist/bin/next start -H 0.0.0.0 -p ${PORT:-3000}"]
+CMD ["sh", "-c", "HOSTNAME=0.0.0.0 PORT=${PORT:-3000} node node_modules/next/dist/bin/next start -H 0.0.0.0 -p ${PORT:-3000}"]
